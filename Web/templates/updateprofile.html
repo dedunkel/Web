@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin:0;
+        }
+        .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .item {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+            border-radius: 20px;
+            border: 2px rgb(85, 86, 87) solid;
+            text-align: center;
+        }
+        .profile_img {
+            border-radius: 30%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        input[type="submit"] {
+            width: 70px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        input[type="submit"]:active {
+            width: 70px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="back">
+        <div class="item">
+            <form action="/updateprofile_action" method="post" enctype="multipart/form-data">
+                <br><h2>내 정보 수정</h2><br>
+                {% for i in data %}
+                    <br><img src= {{i[3]}} alt="프로필 이미지" class="profile_img"><br>
+                    <br><input type="file" name="file" required/><br>
+                    <br>ID : {{i[1]}}<br>
+                    <br>Password : 
+                    <input type="password" placeholder="*****" name="pwd"><br>
+                    <br>Name : 
+                    <input type="text" placeholder={{i[0]}} name="name"><br>
+                    <br>E-mail : 
+                    <input type="email" placeholder={{i[4]}} name="email"><br>
+                    <br>School : 
+                    <input type="text" placeholder={{i[5]}} name="school"><br>
+                    <input type="hidden" value={{i[1]}} name="id">
+                {% endfor %}
+                <br>
+                <br><input type="submit" value="수정" onclick="alert('수정 완료!')"><br>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

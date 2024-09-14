@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin:0;
+        }
+        .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .item {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+            border-radius: 20px;
+            border: 2px rgb(85, 86, 87) solid;
+            text-align: center;
+        }
+        .child {
+            display: inline-block;
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        input[type="submit"]:active {
+            width: 70px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        button {
+            border: none;
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <div class="item">
+            <form action="/login_action" method="post">
+                <br><h2>로그인</h2><br>
+                <br>ID : 
+                <input type="text" placeholder="아이디를 입력하세요" name="id"><br>
+                <br>Password : 
+                <input type="password" placeholder="비밀번호를 입력하세요" name="pwd"><br>
+                <br>
+                <br><input type="submit" value="로그인"><br>
+            </form>
+            <div class="child">
+                <form action="/findid">
+                    <br><input type="submit" value="아이디 찾기">
+                </form>
+            </div>
+            <div class="child">
+                <form action="/findpwd">
+                    <input type="submit" value="비밀번호 찾기">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--데이터베이스에서 아이디 확인해서 로그인 성공/실패-->
+
+</body>
+</html>

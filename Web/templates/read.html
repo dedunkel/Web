@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            margin: auto;
+            width: 700px;
+            border-radius: 5px;
+            border-collapse: collapse;
+        }
+        .header {
+            width: 50px; 
+            height: 30px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+            text-align: center;
+            border-top: none;
+        }
+        .title {
+            width: 650px; 
+            height: 30px;
+            text-align: center;
+            border-top: none;
+        }
+        .subject {
+            width: 300px; 
+            height: 30px;
+            text-align: center;
+            border-top: none;
+        }
+        .content {
+            width: 700px;
+            height: 400px;
+            border: 2px (85, 86, 87) solid;
+        }
+        .content2 {
+            width: 700px;
+            height: 30px;
+            border: 2px (85, 86, 87) solid;
+        }
+        input[type="submit"] {
+            width: 100px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        input[type="submit"]:active {
+            width: 100px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        input[type="text"] {
+            border: 2px rgb(85, 86, 87) solid;
+            width: 700px;
+            height: 30px;
+            border-radius: 5px;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+        textarea {
+            border: 2px (85, 86, 87) solid;
+            width: 700px;
+            height: 50px;
+            border-radius: 5px;
+            padding-left: 10px;
+            font-size: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    {% for i in data %}
+        <table>
+            <tr><td class="header">Title</td>
+            <td class="title"> {{i[3]}} </td></tr>
+            <tr><td class="header">Writer</td>
+            <td class="subject"> {{i[2]}}</td>
+            <td class="header">Dates</td>
+            <td class="subject">{{i[1]}}</td></tr>
+            <tr><td class="header">Content</td></tr>
+            <tr><td class='content'> {{i[4]}} </td></tr>
+
+            <tr align="right"> 
+                <form action="/update" method = 'post'>
+                    <input type="hidden" value={{i[0]}} name="id">
+                    <td><input type="submit" value="수정"></td>
+                </form>
+                <form action="/delete" method = 'post'>
+                    <input type="hidden" value={{i[0]}} name="id">
+                    <td><input type="submit" value="삭제" onclick="alert('삭제 완료')"></td>
+                </form>
+                <form action="/back" method="post">
+                    <input type="hidden" value={{m_id}} name="m_id">
+                    <td><button onclick="location.href='aftermainboard.html'">목록으로</button></td>
+                </form>       
+            </tr>        
+        </table>
+    <form action="/cwrite_action" method="post">
+        <table>
+            <tr><td colspan="2"><h3>Comment</h3></td></tr>
+            <tr><td class="header">Title</td>
+            <td><input type="text" placeholder="제목을 입력하세요" name="title"></td></tr>
+            <tr><td class="header">Writer</td>
+            <td>{{m_name}}</td></tr>
+            <tr><td class="header">Content</td>
+            <td><textarea placeholder="내용을 입력하세요" name="content"></textarea></td></tr>
+            <input type="hidden" value={{m_name}} name="writer">
+            <input type="hidden" value={{i[0]}} name="idx">
+            <input type="hidden" value={{m_id}} name="m_id">
+            <tr align="right"><td><input type="submit" value="등록" onclick="alert('댓글 작성 완료!')"></td></tr>
+        </table>
+    </form>
+    {% endfor %}
+
+    <table class="table">
+        <tr class="header">
+            <td class="title">제목</td>
+            <td class="content2">내용</td>
+            <td class="writer">작성자</td>
+            <td class="date">작성날짜</td>
+        </tr>
+    </table>
+
+    <table class="table">
+        {% for i in data_list %}
+        <tr>
+            <td class="title">{{i[3]}}</td>
+            <td class="content2">{{i[4]}}</td>
+            <form action="/profile" method="post">
+                <td class="writer">
+                    <input type="submit" value={{i[2]}} name="m_name"></td>
+            <td class="date">{{i[1]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

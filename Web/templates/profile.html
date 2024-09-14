@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin:0;
+        }
+        .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .item {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+            border-radius: 20px;
+            border: 2px rgb(85, 86, 87) solid;
+            text-align: center;
+        }
+        .profile_img {
+            border-radius: 30%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="back">
+        {% for i in data %}
+            <div class="item">
+                <br><img src= {{i[3]}} alt="프로필 이미지" class="profile_img"><br>
+                <br>Name : {{i[0]}}<br>
+                <br>ID : {{i[1]}}<br>
+                <br>Email : {{i[4]}}<br>
+                <br>School : {{i[5]}}<br>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

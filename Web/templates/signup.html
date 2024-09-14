@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            margin:0;
+        }
+        .back {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .item {
+            padding-left: 5%;
+            padding-right: 5%;
+            padding-bottom: 3%;
+            border-radius: 20px;
+            border: 2px rgb(85, 86, 87) solid;
+            text-align: center;
+        }
+        input[type="submit"] {
+            width: 70px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        input[type="submit"]:active {
+            width: 70px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+    </style>
+
+</head>
+<body>
+    <div class="back">
+        <div class="item">
+            <form action="/signup_action" method="post" enctype="multipart/form-data">
+                <br><h2>회원가입</h2><br>
+                <br>ID : 
+                <input type="text" placeholder="아이디를 입력하세요" name="id"><br>
+                <br>Password : 
+                <input type="password" placeholder="비밀번호를 입력하세요" name="pwd"><br>
+                <br>Name : 
+                <input type="text" placeholder="이름을 입력하세요" name="name"><br>
+                <br>E-mail : 
+                <input type="email" placeholder="이메일을 입력하세요" name="email"><br>
+                <br>School : 
+                <input type="text" placeholder="학교를 입력하세요" name="school"><br>
+                <br><label for="file">프로필 이미지를 선택하세요 : 
+                    <input type="file" name="file" required/>
+                </label><br>
+                <br>
+                <br><input type="submit" value="가입" onclick="alert('회원가입 완료!')"><br>
+            </form>
+        </div>
+    </div>
+    <!--아이디 중복확인/비밀번호 조건 확인-->
+</body>
+</html>

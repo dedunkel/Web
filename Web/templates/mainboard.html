@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .bigtitle {
+            padding-left:11%;
+        }
+        .parent {
+            padding-right:11%;
+            float:right;
+        }
+        .child {
+            display: inline-block;
+        }
+        table {
+            margin:auto;
+            width: 1200px;
+            border-radius: 5px;
+            border-collapse: collapse;
+            border-top: none;
+        }
+        .header {
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+            text-align: center;
+        }
+        .table td, .table th {
+            border-bottom: 1px lightgray solid; 
+            height: 30px;
+            font-size: 14px;
+        }
+        .num {
+            width: 10px;
+            text-align: center;
+        }
+        .title {
+            width: 200px;
+            text-align: center;
+        }
+        .writer {
+            width: 10px;
+            text-align: center;
+        }
+        .date {
+            width: 70px;
+            text-align: center;
+        }
+        button {
+            width: 100px;
+            height: 30px;
+            border: 0;
+            border-radius: 5px;
+            background-color: rgb(85, 86, 87);
+            color: rgb(255, 255, 255);
+        }
+        input[type="submit"] {
+            border: none;
+            background-color: rgb(255, 255, 255);
+        }
+        input[type="submit"]:active {
+            border: none;
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <div class="bigtitle"><br><h2>게시판</h2></div>    
+    <div class="parent">
+        <div class="child">
+            <form action="/login">
+                <input type="submit" value="로그인" name="login">
+            </form>
+        </div>
+        <div class="child">|</div>
+        <div class="child">
+            <form action="/signup">
+                <input type="submit" value="회원가입" name="signup">
+            </form>
+        </div>
+    </div><br><br>
+    <table>
+        <tr align="right">
+            <form action="/search" method='post'>
+                <td colsapn="4">
+                    <input type="radio" value="title" name="choice"  />제목
+                    <input type="radio" value="content" name="choice"  />내용
+                    <input type="radio" value="all" name="choice"  />전체
+                    <input type="text" placeholder="검색어를 입력하세요" name="search">
+                    <input type="submit" value="검색">
+                </td>
+            </form>
+        </tr>
+    </table>
+    <table class="table">
+        <tr class="header">
+            <td class="num">번호</td>
+            <td class="title">제목</td>
+            <td class="writer">작성자</td>
+            <td class="date">작성날짜</td>
+        </tr>
+    </table>
+    
+    <table class="table">
+        {% for i in data_list %}
+        <tr>
+            <td class="num">{{ i[0] }}</td>
+            <form action="/read" method = 'post'>
+                <td class="title">
+                    <input type="submit" value={{i[3]}} name = "title">
+                </td>
+            </form>
+            <td class="writer">{{ i[2] }}</td>
+            <td class="date">{{ i[1] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!--비로그인시 글쓰기 작성이 안 되게 함-->
+    <form action="/login">
+        <table>
+            <tr align="right">
+                <td><button onclick=a()>글쓰기</button>
+                    <script>function a() {
+                        alert("로그인 먼저 하세요!")
+                    }
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </form>       
+</body>
+</html>
