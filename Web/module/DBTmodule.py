@@ -16,10 +16,10 @@ def createDB():
 
 # Table 생성
 def createDBT():
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
-    sql = "CREATE TABLE Board_Table(idx int AUTO_INCREMENT PRIMARY KEY, datetime DATETIME NOT NULL, name varchar(100) NOT NULL, title varchar(500) NOT NULL, content varchar(500) NOT NULL)"
+    sql = "CREATE TABLE Board_Table(idx int AUTO_INCREMENT PRIMARY KEY, datetime DATETIME NOT NULL, name varchar(100) NOT NULL, title varchar(500) NOT NULL, content varchar(500) NOT NULL, file varchar(255) NOT NULL)"
 
     # Table 삭제
     #sql = "DROP TABLE Board_Table"
@@ -30,17 +30,16 @@ def createDBT():
     conn.close()
     
 # DATABASE TABLE에 정보 추가    
-def insertDB(writer, title, content):
+def insertDB(writer, title, content, file):
     now = datetime.datetime.now()
     format = '%Y-%m-%d %H:%M:%S'
     now = now.strftime(format)
-    print(now)
-    sqlData = (now, writer, title, content)
+    sqlData = (now, writer, title, content, file)
 
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
-    sql = "INSERT INTO Board_Table (idx, datetime, name, title, content) VALUES (NULL, %s, %s, %s, %s)"
+    sql = "INSERT INTO Board_Table (idx, datetime, name, title, content, file) VALUES (NULL, %s, %s, %s, %s, %s)"
 
     cursor.execute(sql, sqlData)
 
@@ -49,7 +48,7 @@ def insertDB(writer, title, content):
     
 # DATABASE TABLE에서 정보 조회
 def selectDB():
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Board_Table"
@@ -64,7 +63,7 @@ def selectDB():
     
 # DATABASE TABLE에서 정보 삭제
 def deleteDB(value):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "DELETE FROM Board_Table WHERE idx=%s"
@@ -76,7 +75,7 @@ def deleteDB(value):
 
 # DATABASE TABLE에서 정보 검색
 def searchidDB(id):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Board_Table WHERE idx = %s"
@@ -89,7 +88,7 @@ def searchidDB(id):
     return data
 
 def searchtitleDB(title):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Board_Table WHERE title = %s"
@@ -102,7 +101,7 @@ def searchtitleDB(title):
     return data
 
 def searchcontentDB(content):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Board_Table WHERE content = %s"
@@ -115,7 +114,7 @@ def searchcontentDB(content):
     return data
 
 def searchnameDB(name):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Board_Table WHERE name = %s"
@@ -132,7 +131,7 @@ def searchnameDB(name):
 
 # DATABASE TABLE에서 정보 수정
 def updatenameDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Board_Table SET name=%s WHERE name=%s"
@@ -143,7 +142,7 @@ def updatenameDB(val1, val2):
     conn.close()
 
 def updatetitleDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Board_Table SET title=%s WHERE title=%s"
@@ -154,7 +153,7 @@ def updatetitleDB(val1, val2):
     conn.close()
 
 def updatecontentDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Board_Table SET content=%s WHERE content=%s"
@@ -164,4 +163,14 @@ def updatecontentDB(val1, val2):
     conn.commit()
     conn.close()
 
-    
+def updatefileDB(val1, val2):
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
+    cursor = conn.cursor()
+
+    sql = "UPDATE Board_Table SET file=%s WHERE file=%s"
+    list=(val1, val2)
+    data = cursor.execute(sql, list)
+
+    conn.commit()
+    conn.close()
+

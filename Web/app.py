@@ -1,7 +1,7 @@
 # file name : app.py
 # pwd : /Web/app.py 
- 
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, send_file
 from werkzeug.utils import secure_filename
 import module.DBTmodule as db
 import module.DBTmodule2 as mdb
@@ -14,6 +14,7 @@ app = Flask(__name__)
 @app.route('/')
 def mainboard():
     data_list = db.selectDB()
+    print(data_list)
     return render_template('mainboard.html', data_list=data_list)
 
 # 로그인 후 게시판 메인 화면
@@ -28,18 +29,29 @@ def write():
     m_id=request.form.get('m_id')
     data=mdb.searchidMDB(m_id)
     m_name=data[0][0]
-    return render_template("write.html", name=m_name)
+    return render_template("write.html", m_name=m_name)
 
 @app.route('/write_action', methods=['POST'])
 def write_action():
     title=request.form.get('title')
-    writer=request.form.get('writer')
     content=request.form.get('content')
 
-    db.insertDB(writer, title, content)
-
-    return mainboard()
+    file= request.files['uploadfile']
+    path = 'static/file/' + secure_filename(file.filename)
+    file.save(path)
     
+    print(path)
+    writer=request.form.get('writer')
+
+
+    data=mdb.searchnameMDB(writer)
+    m_id=data[0][0]
+        
+    db.insertDB(writer, title, content, path)
+
+    return aftermainboard(m_id)
+    
+
 # 댓글 쓰기
 @app.route('/cwrite_action', methods=['POST'])
 def cwrite_action():
@@ -72,12 +84,22 @@ def read():
     else : 
         data2=mdb.searchidMDB(m_id)
         
-    data_list=cdb.searchidDB(idx)
+        data_list=cdb.searchidDB(idx)
+    
+    path=data[0][5]
+    fn=os.path.basename(path)
+    print(fn)
     
     if data[0][2]==data2[0][0]:
-        return render_template("read.html", data=data, m_id=m_id, m_name=data2[0][0], data_list=data_list)
+        return render_template("read.html", data=data, m_id=m_id, m_name=data2[0][0], data_list=data_list, fn=fn)
     else:
-        return render_template("readonly.html", data=data, m_id=m_id, m_name=data2[0][0], data_list=data_list)
+        return render_template("readonly.html", data=data, m_id=m_id, m_name=data2[0][0], data_list=data_list, fn=fn)
+
+# 게시글의 파일 다운로드
+@app.route('/download_file', methods=['POST'])
+def download_file():
+    return send_file('./'+request.form['file'],as_attachment=True)
+    
 
 # 글 수정
 @app.route('/update', methods=['POST'])
@@ -94,11 +116,14 @@ def update_action():
     for i in data:
         title2=i[3]
         content2=i[4]
+        file2=i[5]
     title1=request.form.get('title')
     content1=request.form.get('content')
+    file1=request.files['file']
 
     db.updatetitleDB(title1, title2)
     db.updatecontentDB(content1, content2)    
+    db.updatefileDB(file1, file2)
 
     return mainboard()
 

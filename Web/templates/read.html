@@ -40,6 +40,10 @@
             height: 30px;
             border: 2px (85, 86, 87) solid;
         }
+        button {
+            border: none;
+            background-color: rgb(255, 255, 255);
+        }
         input[type="submit"] {
             width: 100px;
             height: 30px;
@@ -87,6 +91,10 @@
             <td class="subject">{{i[1]}}</td></tr>
             <tr><td class="header">Content</td></tr>
             <tr><td class='content'> {{i[4]}} </td></tr>
+            <tr><td>File</td>
+            <form action='/download_file' method="post">
+                <td><input type="submit" value={{fn}} name='file'></td>
+            </form></tr>
 
             <tr align="right"> 
                 <form action="/update" method = 'post'>
@@ -121,7 +129,7 @@
     {% endfor %}
 
     <table class="table">
-        <tr class="header">
+        <tr>
             <td class="title">제목</td>
             <td class="content2">내용</td>
             <td class="writer">작성자</td>

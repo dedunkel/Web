@@ -3,7 +3,7 @@ import datetime
 
 # DB 생성
 def createDB():
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = 'CREATE DATABASE Board'
@@ -16,7 +16,7 @@ def createDB():
 
 # Table 생성
 def createMDBT():
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     default_img="static/profile/default.jpg"
@@ -35,7 +35,7 @@ def insertMDB(m_name, m_id, m_password, m_img, m_email, m_shcool):
     now = datetime.datetime.now()
     sqlData = (m_name, m_id, m_password, m_img, m_email, m_shcool)
 
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "INSERT INTO Member_Table (name, id, pwd, img, email, school) VALUES (%s, %s, %s, %s, %s, %s)"
@@ -47,7 +47,7 @@ def insertMDB(m_name, m_id, m_password, m_img, m_email, m_shcool):
     
 # DATABASE TABLE에서 정보 조회
 def selectMDB():
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Member_Table"
@@ -62,7 +62,7 @@ def selectMDB():
     
 # DATABASE TABLE에서 정보 삭제 (id를 받아 삭제)
 def deleteMDB(value):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "DELETE FROM Member_Table WHERE id=%s"
@@ -74,7 +74,7 @@ def deleteMDB(value):
 
 # DATABASE TABLE에서 정보 검색
 def searchidMDB(m_id):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Member_Table WHERE id = %s"
@@ -87,7 +87,7 @@ def searchidMDB(m_id):
     return data
 
 def searchpwdMDB(m_pwd):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Member_Table WHERE pwd = %s"
@@ -101,7 +101,7 @@ def searchpwdMDB(m_pwd):
 
 
 def searchnameMDB(m_name):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Member_Table WHERE name = %s"
@@ -114,7 +114,7 @@ def searchnameMDB(m_name):
     return data
 
 def searchemailMDB(m_email):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Member_Table WHERE email = %s"
@@ -127,7 +127,7 @@ def searchemailMDB(m_email):
     return data
 
 def searchschoolMDB(m_school):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "SELECT * FROM Member_Table WHERE school = %s"
@@ -142,7 +142,7 @@ def searchschoolMDB(m_school):
 # DATABASE TABLE에서 정보 수정
 # 이름 수정
 def updatenameMDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Member_Table SET name=%s WHERE name=%s"
@@ -153,7 +153,7 @@ def updatenameMDB(val1, val2):
     conn.close()
 # 학교 수정
 def updateschoolMDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Member_Table SET school=%s WHERE school=%s"
@@ -164,7 +164,7 @@ def updateschoolMDB(val1, val2):
     conn.close()
 # 이메일 수정
 def updateemailMDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Member_Table SET email=%s WHERE email=%s"
@@ -175,7 +175,7 @@ def updateemailMDB(val1, val2):
     conn.close()
 # 비밀번호 수정
 def updatepwdMDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Member_Table SET pwd=%s WHERE pwd=%s"
@@ -186,7 +186,7 @@ def updatepwdMDB(val1, val2):
     conn.close()
     
 def updateimgMDB(val1, val2):
-    conn = pymysql.connect(host='localhost', user='root', password='', db='Board', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', charset='utf8')
     cursor = conn.cursor()
 
     sql = "UPDATE Member_Table SET img=%s WHERE img=%s"

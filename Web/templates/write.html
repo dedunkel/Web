@@ -22,7 +22,7 @@
         textarea {
             border: 2px (85, 86, 87) solid;
             width: 700px;
-            height: 400px;
+            height: 300px;
             border-radius: 5px;
             padding-left: 10px;
             font-size: 15px;
@@ -51,16 +51,17 @@
     
 </head>
 <body>
-    <form action="/write_action" method="post">
+    <form action="/write_action" method="post" enctype="multipart/form-data">
         <table>
             <tr><td colspan="2"><h2>글쓰기</h2></td></tr>
             <tr><td class="header">Title</td></tr>
             <tr><td><input type="text" placeholder="제목을 입력하세요" name="title"></td></tr>
             <tr><td class="header">Writer</td></tr>
-            <tr><td>{{name}}</td></tr>
+            <tr><td>{{m_name}}</td></tr>
             <tr><td class="header">Content</td></tr>
             <tr><td><textarea placeholder="내용을 입력하세요" name="content"></textarea></td></tr>
-            <input type="hidden" value={{name}} name="writer">
+            <tr><td><input type="file" name="uploadfile" required/></td></tr>
+            <input type="hidden" value={{m_name}} name="writer">
             <tr align="right"><td><input type="submit" value="등록" onclick="alert('작성 완료!')"></td></tr>
         </table>
     </form>
