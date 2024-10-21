@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Reference
+        </title> 
+        <h2>Reference</h2>   
+        <style>
+            img {
+                width: auto;
+                height: 400px;
+                display: inline-block;
+                margin : auto;
+                margin-bottom: 10px;
+                padding: 0 0 10px 15px ;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            for(let i=1;i<=22;i++){
+                let img = document.createElement('img');
+                if(i==3||i == 8||i==9||i==17){
+                    img.src = "./img/"+i+".png";
+                }
+                else{
+                    img.src = "./img/"+i+".jpg";
+                }
+                img.getElementsByClassName("image")
+                img.alt = "Reference"+i;
+                document.body.appendChild(img)
+            }
+        </script>
+    </body>
+</html>
